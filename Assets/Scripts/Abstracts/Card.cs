@@ -7,4 +7,5 @@ public class Card
     public string description;
     public Sprite illustration;
     public int ownerID;
+    public int id;
 }

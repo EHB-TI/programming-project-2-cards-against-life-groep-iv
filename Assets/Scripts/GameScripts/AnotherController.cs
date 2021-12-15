@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 public class AnotherController : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class AnotherController : MonoBehaviour
 
     public GameObject []prefabs;
 
-
+/*
     private void Awake()
     {
         instance = this;
@@ -74,4 +75,26 @@ public class AnotherController : MonoBehaviour
         card.cardName = "TEST";
         prefabs[selection].GetComponent<AnotherScript>().initialize(card); 
     }
+
+    IEnumerator Register(int id)
+    {
+        //source: https://docs.unity3d.com/Manual/UnityWebRequest-SendingForm.html
+
+        WWWForm form = new WWWForm();
+        form.AddField("id", id );
+       // form.AddField("password", passwordField.text);
+
+        UnityWebRequest www = UnityWebRequest.Post("http://localhost/sqlconnect/register.php", form);
+        yield return www.SendWebRequest();
+        if (www.result == UnityWebRequest.Result.Success)
+        {
+            Debug.Log("User created succesfully!");
+            //UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        }
+        else
+        {
+            Debug.Log("User creation failed!. Error: " + www.error);
+        }
+    }
+*/
 }
