@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
+using Mirror;
 
 public class AnotherController : MonoBehaviour
 {
@@ -12,12 +13,13 @@ public class AnotherController : MonoBehaviour
     public Card[] cards;
    // public Transform pos1, pos2, pos3,pos4;
     public Transform [] positions;
-    public AnotherScript [] cardControllerPrefab;
+ //   public AnotherScript [] cardControllerPrefab;
     public int selection;
 
     public GameObject []prefabs;
+    public CardsManager PlayerManager;
 
-/*
+
     private void Awake()
     {
         instance = this;
@@ -27,9 +29,9 @@ public class AnotherController : MonoBehaviour
     {
 
         cards = new Card [4];
-        GenerateCards();
+        //GenerateCards();
     }
-
+    /*
     private void GenerateCards()
     {
        for (int i = 0; i< positions.Length; i++)
@@ -49,7 +51,7 @@ public class AnotherController : MonoBehaviour
             cards[i] = card;
         }
     }
-
+    */
     public void selectCard(int number)
     {
         Debug.Log("Selected " + number);
@@ -68,33 +70,19 @@ public class AnotherController : MonoBehaviour
         Debug.Log(card.cardName);
     }
 
-    public void changeAtForce()
+    public CardsManager CardsManager;
+
+    //OnClick() is called by the OnClick() event within the Button component
+    public void OnClick()
     {
-        //get card From API!!!
-        Card card = new Card();
-        card.cardName = "TEST";
-        prefabs[selection].GetComponent<AnotherScript>().initialize(card); 
+        //locate the PlayerManager in this Client and request the Server to deal cards
+        NetworkIdentity networkIdentity = NetworkClient.connection.identity;
+        CardsManager = networkIdentity.GetComponent<CardsManager>();
+        CardsManager.PlayCard(prefabs[selection]);
     }
 
-    IEnumerator Register(int id)
-    {
-        //source: https://docs.unity3d.com/Manual/UnityWebRequest-SendingForm.html
 
-        WWWForm form = new WWWForm();
-        form.AddField("id", id );
-       // form.AddField("password", passwordField.text);
 
-        UnityWebRequest www = UnityWebRequest.Post("http://localhost/sqlconnect/register.php", form);
-        yield return www.SendWebRequest();
-        if (www.result == UnityWebRequest.Result.Success)
-        {
-            Debug.Log("User created succesfully!");
-            //UnityEngine.SceneManagement.SceneManager.LoadScene(0);
-        }
-        else
-        {
-            Debug.Log("User creation failed!. Error: " + www.error);
-        }
-    }
-*/
+
+
 }

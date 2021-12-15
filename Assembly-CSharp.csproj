@@ -68,25 +68,32 @@
     <Compile Include="Assets\Scenes\WebTest.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
     <Compile Include="Assets\Scripts\Controllers\UI\Tabs\TabGroup.cs" />
+    <Compile Include="Assets\Scripts\GameScripts\network\Scripts\DrawCards.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
     <Compile Include="Assets\Scripts\GameScripts\AnotherScript.cs" />
     <Compile Include="Assets\Scripts\Controllers\UI\CardController.cs" />
+    <Compile Include="Assets\Scripts\GameScripts\network\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scenes\Registration.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
     <Compile Include="Assets\Scripts\Managers\PlayerManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
+    <Compile Include="Assets\Scripts\GameScripts\network\Scripts\DragDrop.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
     <Compile Include="Assets\Scripts\MainMenu.cs" />
     <Compile Include="Assets\Scripts\GameScripts\CardsManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs" />
     <Compile Include="Assets\Scripts\Managers\TurnManager.cs" />
+    <Compile Include="Assets\Scripts\GameScripts\network\Scripts\PlayerManagerr.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
+    <Compile Include="Assets\Scripts\GameScripts\network\Scripts\CardZoom.cs" />
+    <Compile Include="Assets\Scripts\GameScripts\network\Scripts\CardFlipper.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
+    <Compile Include="Assets\Scripts\GameScripts\network\Scripts\TargetClick.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
     <Compile Include="Assets\Scripts\Managers\CardManager.cs" />
@@ -97,6 +104,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
+    <Compile Include="Assets\Scripts\GameScripts\network\Scripts\IncrementClick.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextConsoleSimulator.cs" />
@@ -106,14 +114,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
     <Compile Include="Assets\Scripts\Abstracts\Player.cs" />
-    <Compile Include="Assets\Scripts\GameScripts\network\Scripts\DragDrop.cs" />
-    <Compile Include="Assets\Scripts\GameScripts\network\Scripts\DrawCards.cs" />
-    <Compile Include="Assets\Scripts\GameScripts\network\Scripts\PlayerManagerr.cs" />
-    <Compile Include="Assets\Scripts\GameScripts\network\Scripts\CardZoom.cs" />
-    <Compile Include="Assets\Scripts\GameScripts\network\Scripts\GameManager.cs" />
-    <Compile Include="Assets\Scripts\GameScripts\network\Scripts\CardFlipper.cs" />
-    <Compile Include="Assets\Scripts\GameScripts\network\Scripts\TargetClick.cs" />
-    <Compile Include="Assets\Scripts\GameScripts\network\Scripts\IncrementClick.cs" />
+    <Compile Include="Assets\playCards.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Mirror\Plugins\Mono.Cecil\Mono.CecilX.dll" />
