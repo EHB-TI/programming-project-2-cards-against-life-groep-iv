@@ -12,17 +12,6 @@ public class CardController : MonoBehaviour, IPointerEnterHandler, IPointerDownH
     public TextMeshProUGUI cardName, description;
 
 
-    private void Awake()
-    {
-       
-    }
-
-    // Start is called before the first frame update
-    private void Start()
-    {
-        
-    }
-
     public void initialize(Card card)
     {
         this.card = card;

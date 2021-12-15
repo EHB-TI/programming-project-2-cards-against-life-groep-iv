@@ -14,7 +14,7 @@ public class AnotherController : MonoBehaviour
     public AnotherScript [] cardControllerPrefab;
     public int selection;
 
-    public GameObject prefabs;
+    public GameObject []prefabs;
 
 
     private void Awake()
@@ -38,6 +38,7 @@ public class AnotherController : MonoBehaviour
             //get card From API!!!
             Card card = new Card();
             cardControllerPrefab[i].card = card;
+            //prefabs[i].GetComponent<AnotherScript>().initialize(card);
             Debug.Log("created: " + i);
 
 
@@ -57,5 +58,20 @@ public class AnotherController : MonoBehaviour
     public void finalSelection()
     {
         Debug.Log("U HAVE SELECTED: " + selection);
+        Card card = new Card();
+        card.cardName = "TEST";
+        //prefabs[selection].GetComponentinchild<Description>().initialize(card);
+        prefabs[selection].GetComponentInChildren<Text>().text = card.cardName;
+        prefabs[selection].transform.Find("CardName").GetComponent<Text>().text = "TITLE";
+       // this.transform.Find("Strong Aquaragia break").GetComponent<ParticleSystem>(
+        Debug.Log(card.cardName);
+    }
+
+    public void changeAtForce()
+    {
+        //get card From API!!!
+        Card card = new Card();
+        card.cardName = "TEST";
+        prefabs[selection].GetComponent<AnotherScript>().initialize(card); 
     }
 }

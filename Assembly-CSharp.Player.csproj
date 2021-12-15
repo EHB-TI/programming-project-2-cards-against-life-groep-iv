@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{C6B3B7CE-64E2-6D98-9EC9-BFFBBA2BCA8D}</ProjectGuid>
+    <ProjectGuid>{E56323D9-A867-0F67-10BA-2CACD972DFB6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -53,21 +53,31 @@
     <UnityVersion>2020.3.24f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\GameScripts\ButtonControllerGame.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
+    <Compile Include="Assets\Scenes\MenuNavigation.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
+    <Compile Include="Assets\Scripts\GameScripts\AnotherController.cs" />
+    <Compile Include="Assets\clicky.cs" />
+    <Compile Include="Assets\Scripts\GameScripts\Card2.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
+    <Compile Include="Assets\Scenes\WebTest.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
+    <Compile Include="Assets\Scripts\Controllers\UI\Tabs\TabGroup.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
+    <Compile Include="Assets\Scripts\GameScripts\AnotherScript.cs" />
     <Compile Include="Assets\Scripts\Controllers\UI\CardController.cs" />
+    <Compile Include="Assets\Scenes\Registration.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
     <Compile Include="Assets\Scripts\Managers\PlayerManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
     <Compile Include="Assets\Scripts\MainMenu.cs" />
+    <Compile Include="Assets\Scripts\GameScripts\CardsManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs" />
     <Compile Include="Assets\Scripts\Managers\TurnManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
@@ -81,6 +91,7 @@
     <Compile Include="Assets\Scripts\Managers\CardManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\Abstracts\Card.cs" />
+    <Compile Include="Assets\Scripts\Controllers\UI\Tabs\TabButton.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
@@ -94,12 +105,6 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
     <Compile Include="Assets\Scripts\Abstracts\Player.cs" />
-    <Compile Include="Assets\Scripts\GameScripts\Card2.cs" />
-    <Compile Include="Assets\Scripts\GameScripts\CardsManager.cs" />
-    <Compile Include="Assets\clicky.cs" />
-    <Compile Include="Assets\Scripts\GameScripts\ButtonControllerGame.cs" />
-    <Compile Include="Assets\Scripts\GameScripts\AnotherController.cs" />
-    <Compile Include="Assets\Scripts\GameScripts\AnotherScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -731,47 +736,47 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Unity.InternalAPIEngineBridge.001.csproj">
-      <Project>{4D7ED599-654C-F633-FF4D-2E6437DEA6B8}</Project>
+      <Project>{74393187-FF3A-494C-204F-134ABE0A9BE1}</Project>
       <Name>Unity.InternalAPIEngineBridge.001</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.2D.PixelPerfect.csproj">
-      <Project>{2B443F46-0755-26DF-F643-D536A7548310}</Project>
+      <Project>{7B97EEE6-1C69-AFC9-145E-DF1D7AFFB907}</Project>
       <Name>Unity.2D.PixelPerfect</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.Timeline.csproj">
-      <Project>{3E81D2EA-6F6A-24BE-A16A-69AE31A94211}</Project>
+      <Project>{C8D4B0ED-1D6E-0BDB-D5A2-574DC122F944}</Project>
       <Name>Unity.Timeline</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.TextMeshPro.csproj">
-      <Project>{F3D588C7-F806-E3F6-A48C-0B3A62ADF4ED}</Project>
+      <Project>{A8D4B1D9-9140-19AF-A3F4-5A6DAE3A25A9}</Project>
       <Name>Unity.TextMeshPro</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEngine.UI.csproj">
-      <Project>{24D4E4B5-660B-7D40-728F-CBB9CE17328D}</Project>
+      <Project>{1B72B46B-45F1-38DF-9334-CA3E2C5FBF1F}</Project>
       <Name>UnityEngine.UI</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.Mathematics.csproj">
-      <Project>{85AE5653-E74D-AAD6-D38E-30805809EF5D}</Project>
+      <Project>{7C0D3D84-925F-7090-F964-9A3DB208D97F}</Project>
       <Name>Unity.Mathematics</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.2D.IK.Runtime.csproj">
-      <Project>{0A46C0F4-411F-95A5-8DD1-AA3AD63CA580}</Project>
+      <Project>{ADE1F857-A308-8725-F601-7BA93432A400}</Project>
       <Name>Unity.2D.IK.Runtime</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.2D.Animation.Triangle.Runtime.csproj">
-      <Project>{305F9E70-26F5-DCE6-8E0C-9284E121BA5B}</Project>
+      <Project>{E99411FC-5963-1F35-DA73-672619AFBD06}</Project>
       <Name>Unity.2D.Animation.Triangle.Runtime</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.2D.Animation.Runtime.csproj">
-      <Project>{CE1F9F74-2F0F-07BD-567F-6C7144105208}</Project>
+      <Project>{D8E49AE4-98CC-113A-7B61-EF6D0D09EB14}</Project>
       <Name>Unity.2D.Animation.Runtime</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.2D.Common.Runtime.csproj">
-      <Project>{A9FF0BD3-2083-55AB-19A2-2F389EA9A078}</Project>
+      <Project>{24E460CA-800B-0C44-F20E-8DE46DDAD358}</Project>
       <Name>Unity.2D.Common.Runtime</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.2D.SpriteShape.Runtime.csproj">
-      <Project>{B477950D-64C7-530C-8030-5244F38191CB}</Project>
+      <Project>{6DF658C9-F6DC-4C82-D97F-5973AACE6FE1}</Project>
       <Name>Unity.2D.SpriteShape.Runtime</Name>
     </ProjectReference>
   </ItemGroup>

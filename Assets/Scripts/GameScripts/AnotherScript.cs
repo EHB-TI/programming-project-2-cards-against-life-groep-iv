@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 
-public class AnotherScript : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler
+public class AnotherScript : MonoBehaviour
 {
     public Card card;
     public Image illustration;
@@ -31,13 +31,4 @@ public class AnotherScript : MonoBehaviour, IPointerEnterHandler, IPointerDownHa
         description.text = card.description;
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        Debug.Log("entered" + this.gameObject.name);
-    }
-
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        Debug.Log("clicked");
-    }
 }
