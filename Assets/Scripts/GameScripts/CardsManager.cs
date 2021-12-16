@@ -17,16 +17,42 @@ public class CardsManager : NetworkBehaviour, ISelectHandler
 
     //the cards List represents our deck of cards
     List<GameObject> cards = new List<GameObject>();
+    List<GameObject> prefabs = new List<GameObject>();
+    List<GameObject> originals = new List<GameObject>();
+
+    public GameObject prefab;
+
+    List<GameObject> PlayerArea = new List<GameObject>();
+
+
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+
+        PlayerArea.Add(GameObject.Find("Pos1"));
+        PlayerArea.Add(GameObject.Find("Pos2"));
+        PlayerArea.Add(GameObject.Find("Pos3"));
+        PlayerArea.Add(GameObject.Find("Pos4"));
+        // prefabs.Add(GameObject.Find("POS1").GetComponent<prefab>());
+        for (int i = 0; i < PlayerArea.Count; i++)
+        {
+            Debug.Log(i);
+            prefabs.Add(PlayerArea[i].transform.GetChild(0).gameObject);
+        }
+      
+        
+    }
+
 
     [Server]
     public override void OnStartServer()
     {
-        cards.Add(card1);
-        cards.Add(card2);
+        //cards.Add(card1);
+       // cards.Add(card2);
     }
     void Start()
     {
-        cardos = new Card2[4];
+       // cardos = new Card2[4];
         //cards[0] = ??
     }
 
@@ -58,25 +84,45 @@ public class CardsManager : NetworkBehaviour, ISelectHandler
     {
         Debug.Log("command CmdDealCards");
         //(5x) Spawn a random card from the cards deck on the Server, assigning authority over it to the Client that requested the Command. Then run RpcShowCard() and indicate that this card was "Dealt"
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 4; i++)
         {
-            GameObject card = Instantiate(cards[Random.Range(0, cards.Count)], new Vector2(0, 0), Quaternion.identity);
+            Vector2 pos = PlayerArea[i].transform.position;
+            Destroy(prefabs[i].gameObject);
+            GameObject card = Instantiate(card1, new Vector2(0.0f,0.0f), Quaternion.identity);
+            prefabs[i] = card;
             NetworkServer.Spawn(card, connectionToClient);
-            RpcShowCard(card, "Dealt");
+           
+            RpcShowCard(card, "Dealt", i);
         }
     }
 
 
     //ClientRpcs are methods requested by the Server to run on all Clients, and require the [ClientRpc] attribute immediately preceding them
     [ClientRpc]
-    void RpcShowCard(GameObject card, string type)
+    void RpcShowCard(GameObject card, string type, int number)
     {
+
+        if (isServer)
+        {
+            card.GetComponent<CardFlipper>().Flip("host");
+        }
+        else
+            card.GetComponent<CardFlipper>().Flip("player");
+
+
         Debug.Log("LLega ClientRcp");
         //if the card has been "Dealt," determine whether this Client has authority over it, and send it either to the PlayerArea or EnemyArea, accordingly. For the latter, flip it so the player can't see the front!
         if (type == "Dealt")
         {
             if (hasAuthority)
             {
+                //GET NEW CARD!
+                //DO SMT (SHOW WHO IS THE WINNER)
+                card.transform.SetParent(PlayerArea[number].transform, false);
+               // card.transform.position = new Vector3(0.0f, 0.0f);
+               
+                //INSTEAD OF "TEST" GET THE VALUE FROM DATABASE!
+                card.GetComponentInChildren<Text>().text = "TEST";
                 // card.transform.SetParent(PlayerArea.transform, false);
                 Debug.Log("player with authority");
             }
@@ -90,28 +136,38 @@ public class CardsManager : NetworkBehaviour, ISelectHandler
         //if the card has been "Played," send it to the DropZone. If this Client doesn't have authority over it, flip it so the player can now see the front!
         else if (type == "Played")
         {
-            /* card.transform.SetParent(DropZone.transform, false);
+         
              if (!hasAuthority)
              {
-                 card.GetComponent<CardFlipper>().Flip();
+                Debug.Log("played");
+                ChangeCard(number);
+                card.GetComponent<CardFlipper>().Flip("host");
              }
-            */
-            Debug.Log("played");
+            
+          
         }
+    }
+
+    [ClientRpc]
+    void ChangeCard(int number)
+    {
+        Debug.Log("changing Card");
+        // card.GetComponentInChildren<Text>().text = "Used card";
+        prefabs[number].GetComponentInChildren<Text>().text = "Used CARD";
     }
 
 
     //PlayCard() is called by the DragDrop script when a card is placed in the DropZone, and requests CmdPlayCard() from the Server
-    public void PlayCard(GameObject card)
+    public void PlayCard(GameObject card, int number)
     {
-        CmdPlayCard(card);
+        CmdPlayCard(card, number);
     }
 
     //CmdPlayCard() uses the same logic as CmdDealCards() in rendering cards on all Clients, except that it specifies that the card has been "Played" rather than "Dealt"
     [Command]
-    void CmdPlayCard(GameObject card)
+    void CmdPlayCard(GameObject card, int number)
     {
-        RpcShowCard(card, "Played");
+        RpcShowCard(card, "Played", number);
 
         //If this is the Server, trigger the UpdateTurnsPlayed() method to demonstrate how to implement game logic on card drop
         if (isServer)

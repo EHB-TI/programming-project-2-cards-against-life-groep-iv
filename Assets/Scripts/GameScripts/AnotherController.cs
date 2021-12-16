@@ -78,7 +78,7 @@ public class AnotherController : MonoBehaviour
         //locate the PlayerManager in this Client and request the Server to deal cards
         NetworkIdentity networkIdentity = NetworkClient.connection.identity;
         CardsManager = networkIdentity.GetComponent<CardsManager>();
-        CardsManager.PlayCard(prefabs[selection]);
+        CardsManager.PlayCard(prefabs[selection], selection);
     }
 
 

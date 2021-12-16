@@ -97,3 +97,5 @@ MonoBehaviour:
   clicked: 0
   card1: {fileID: 6844489931374519445, guid: 2acd320cbdcdc4342a01b981ca8bdbfe, type: 3}
   card2: {fileID: 6844489931374519445, guid: 2acd320cbdcdc4342a01b981ca8bdbfe, type: 3}
+  prefab: {fileID: 6844489931374519445, guid: 2acd320cbdcdc4342a01b981ca8bdbfe, type: 3}
+  PlayerArea: {fileID: 7853438903053609421, guid: 59c6c6b4db69cab41b56081761ca4ba1, type: 3}
