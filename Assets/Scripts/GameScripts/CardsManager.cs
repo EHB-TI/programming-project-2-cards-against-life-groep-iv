@@ -23,11 +23,44 @@ public class CardsManager : NetworkBehaviour, ISelectHandler
     public GameObject prefab;
 
     List<GameObject> PlayerArea = new List<GameObject>();
+    [SyncVar]public int playersReady;
+    [SyncVar]
+    public int players = 0;
+    private int scene = 0; //0 = PLAYERS ARE PICKING - 1 = HOST IS PICKING  - 2 = SHOWING RESULTS
+    public enum Status //Los diferentes estados que tendremos en el juego
+    {
+        HostPicking,
+        PlayersPicking,
+        ShowingResults,
 
+    }
+
+    public int playersNeeded = 0;
+
+    public GameObject mainText;
+    Text text;
+
+    public GameObject playerReady;
+    Text playersR;
+    bool ready;
+
+    public GameObject numberOfPlayers;
+    Text numberPlayers;
+
+    
 
     public override void OnStartClient()
     {
         base.OnStartClient();
+        mainText = GameObject.Find("MAIN_SENTENCE");
+        text = mainText.GetComponent<Text>();
+        playerReady = GameObject.Find("PlayersReady");
+        playersR = playerReady.GetComponent<Text>();
+        numberOfPlayers = GameObject.Find("NumberOfPlayers");
+        numberPlayers = numberOfPlayers.GetComponent<Text>();
+
+        playersR.text = "Ready: " + playersReady + " /2";
+        ready = false;
 
         PlayerArea.Add(GameObject.Find("Pos1"));
         PlayerArea.Add(GameObject.Find("Pos2"));
@@ -39,8 +72,9 @@ public class CardsManager : NetworkBehaviour, ISelectHandler
             Debug.Log(i);
             prefabs.Add(PlayerArea[i].transform.GetChild(0).gameObject);
         }
-      
-        
+        players++;
+        numberPlayers.text = "PLAYERS: " + players;
+        Debug.Log("PLAYERS: " + players);  
     }
 
 
@@ -52,16 +86,32 @@ public class CardsManager : NetworkBehaviour, ISelectHandler
     }
     void Start()
     {
-       // cardos = new Card2[4];
+        // cardos = new Card2[4];
         //cards[0] = ??
+        for (int i = 0; i < prefabs.Count; i++)
+        {
+            if (isServer)
+            {
+                prefabs[i].GetComponent<CardFlipper>().Flip("host");
+            }
+            else
+                prefabs[i].GetComponent<CardFlipper>().Flip("player");
+        }
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    void Update() 
+        {
 
+            //only server is allowed to announce player count since he is the only that can count them
+            if (isServer)
+            {
+                players = NetworkServer.connections.Count;
+            }
+            numberPlayers.text = " players " + players + "/4";
+        playersR.text = "Ready: " + playersReady + " /2";
+
+    }
     public void deleteCard1(int id)
     {
        // cards[0] = new Card2(id, sentence);
@@ -79,20 +129,30 @@ public class CardsManager : NetworkBehaviour, ISelectHandler
         Debug.Log(this.gameObject.name + " was selected");
     }
 
+
+    //BUTTON TO CHANGE THE CARDS OF THE PLAYERS OR CHANGE THE SENTENCE FROM THE HOST
     [Command]
     public void CmdDealCards()
     {
         Debug.Log("command CmdDealCards");
         //(5x) Spawn a random card from the cards deck on the Server, assigning authority over it to the Client that requested the Command. Then run RpcShowCard() and indicate that this card was "Dealt"
-        for (int i = 0; i < 4; i++)
+        if (isServer)
         {
-            Vector2 pos = PlayerArea[i].transform.position;
-            Destroy(prefabs[i].gameObject);
-            GameObject card = Instantiate(card1, new Vector2(0.0f,0.0f), Quaternion.identity);
-            prefabs[i] = card;
-            NetworkServer.Spawn(card, connectionToClient);
-           
-            RpcShowCard(card, "Dealt", i);
+            //GET TEXT FROM DATABASE
+            text.text = "TEXT CHANGED SUCCESFULLY";
+        }
+        else
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                Vector2 pos = PlayerArea[i].transform.position;
+                Destroy(prefabs[i].gameObject);
+                GameObject card = Instantiate(card1, new Vector2(0.0f, 0.0f), Quaternion.identity);
+                prefabs[i] = card;
+                NetworkServer.Spawn(card, connectionToClient);
+
+                RpcShowCard(card, "Dealt", i);
+            }
         }
     }
 
@@ -104,15 +164,17 @@ public class CardsManager : NetworkBehaviour, ISelectHandler
 
         if (isServer)
         {
-            card.GetComponent<CardFlipper>().Flip("host");
+            prefabs[number].GetComponent<CardFlipper>().Flip("host");
+            
         }
         else
-            card.GetComponent<CardFlipper>().Flip("player");
+            prefabs[number].GetComponent<CardFlipper>().Flip("player");
+       
 
 
         Debug.Log("LLega ClientRcp");
         //if the card has been "Dealt," determine whether this Client has authority over it, and send it either to the PlayerArea or EnemyArea, accordingly. For the latter, flip it so the player can't see the front!
-        if (type == "Dealt")
+       /* if (type == "Dealt")
         {
             if (hasAuthority)
             {
@@ -146,6 +208,7 @@ public class CardsManager : NetworkBehaviour, ISelectHandler
             
           
         }
+       */
     }
 
     [ClientRpc]
@@ -160,8 +223,30 @@ public class CardsManager : NetworkBehaviour, ISelectHandler
     //PlayCard() is called by the DragDrop script when a card is placed in the DropZone, and requests CmdPlayCard() from the Server
     public void PlayCard(GameObject card, int number)
     {
-        CmdPlayCard(card, number);
+        if (isServer)
+        {
+            prefabs[number].GetComponent<CardFlipper>().Flip("host");
+        }
+        else
+        {
+            //CmdPlayCard(card, number);
+        }
+        if (ready == false)
+        {
+            ready = true;
+            updatePlayers();
+        }
+        playersR.text = "Ready: " + playersReady + " /2";
     }
+    //UpdateTurnsPlayed() is run only by the Server, finding the Server-only GameManager game object and incrementing the relevant variable
+    [Server]
+    void updatePlayers()
+    {
+        playersReady++;
+        Debug.Log("incremented ready");
+        Debug.Log(ready);
+    }
+
 
     //CmdPlayCard() uses the same logic as CmdDealCards() in rendering cards on all Clients, except that it specifies that the card has been "Played" rather than "Dealt"
     [Command]
@@ -172,7 +257,14 @@ public class CardsManager : NetworkBehaviour, ISelectHandler
         //If this is the Server, trigger the UpdateTurnsPlayed() method to demonstrate how to implement game logic on card drop
         if (isServer)
         {
-            UpdateTurnsPlayed();
+            if (playersReady <= 2)
+            {
+                UpdateTurnsPlayed();
+                //SHOW CARDS FOR SERVER
+            }
+
+            else
+                Debug.Log("Not all players are ready");
         }
     }
 

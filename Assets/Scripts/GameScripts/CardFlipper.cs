@@ -31,6 +31,7 @@ public class CardFlipper : MonoBehaviour
 
         if (caller == "host")
         {
+            transform.GetChild(2).gameObject.SetActive(true);
             transform.GetChild(1).gameObject.SetActive(false);
             Debug.Log("host");
            // gameObject.GetComponent<Text>().gameObject.SetActive(false);
@@ -38,8 +39,9 @@ public class CardFlipper : MonoBehaviour
         else
         {
             Debug.Log("player");
+            transform.GetChild(2).gameObject.SetActive(false);
             transform.GetChild(1).gameObject.SetActive(true);
-           // gameObject.GetComponent<Text>().text = "waiting for player";
+            // gameObject.GetComponent<Text>().text = "waiting for player";
         }
 
 

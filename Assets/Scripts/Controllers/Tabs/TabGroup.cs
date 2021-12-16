@@ -10,6 +10,8 @@ public class TabGroup : MonoBehaviour
     public GameObject menu1;
     public GameObject menu2;
 
+    public bool open;
+
     private void Awake()
     {
         //ResetTabs();
@@ -56,4 +58,5 @@ public class TabGroup : MonoBehaviour
             button.background.color = Color.white;
         }
     }
+
 }
