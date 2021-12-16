@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{9F37D804-F8FA-37A0-A089-D25388A09830}</ProjectGuid>
+    <ProjectGuid>{C0DDDBD3-9C67-ED91-7A05-137B7133E03B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Unity.Mirror.CodeGen</AssemblyName>
@@ -692,7 +692,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Mirror.csproj">
-      <Project>{AFACD241-3201-3C9C-39BE-0C59E8D5799C}</Project>
+      <Project>{3944A6D7-71C9-3C85-2E81-02B732B403AB}</Project>
       <Name>Mirror</Name>
     </ProjectReference>
   </ItemGroup>
