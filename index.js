@@ -2,7 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const pool = require("./config/database");
-const userRouter = require('./categories/categories.router')
+const userRouter = require('./categories/categories.router');
+const RoomRouter = require('./categories/rooms.router');
 
 
 //This is to fix the CORS errors
@@ -15,25 +16,26 @@ app.use(function(req, res, next) {
 app.use(express.json());
 
 app.use('/categories',  userRouter);
+app.use('/rooms',  RoomRouter);
 
-app.get('/PG', (req, res)=> {
-    // source: https://stackoverflow.com/questions/61289125/how-to-retrive-data-from-multiple-tables-using-node-js-and-mysql
-    pool.query("SELECT * FROM PGAnswers",(err,rows,fields)=>{
-        if(!err){
-            pool.query("SELECT * FROM PGQuestions",(errTarn,rowsTarn,fieldsTarn)=>{
-                if(!errTarn){
-                    res.json({
-                      PG :{
-                      answers : rows,
-                      questions: rowsTarn
-                    }});
-                }
-            }); 
+// app.get('/PG', (req, res)=> {
+//     // source: https://stackoverflow.com/questions/61289125/how-to-retrive-data-from-multiple-tables-using-node-js-and-mysql
+//     pool.query("SELECT * FROM PGAnswers",(err,rows,fields)=>{
+//         if(!err){
+//             pool.query("SELECT * FROM PGQuestions",(errTarn,rowsTarn,fieldsTarn)=>{
+//                 if(!errTarn){
+//                     res.json({
+//                       PG :{
+//                       answers : rows,
+//                       questions: rowsTarn
+//                     }});
+//                 }
+//             }); 
       
-        }
-        else console.log(err);
-      });
-})
+//         }
+//         else console.log(err);
+//       });
+// })
 
 app.get('/PG13', (req, res)=> {
     // source: https://stackoverflow.com/questions/61289125/how-to-retrive-data-from-multiple-tables-using-node-js-and-mysql
