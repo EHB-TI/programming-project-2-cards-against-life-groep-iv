@@ -1,5 +1,7 @@
+//Author: De Vogel Ryan
 const { createPool } = require('mysql');
 
+//process.env get's the variables out of the .env file
 const connectionPool = createPool({
     multipleStatements: true,
     port:process.env.DBPORT,

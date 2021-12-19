@@ -1,3 +1,4 @@
+//Author: De Vogel Ryan
 const connectionPool = require("../config/database");
 
 module.exports = {

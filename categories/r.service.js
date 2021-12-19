@@ -2,9 +2,9 @@
 const connectionPool = require("../config/database");
 
 module.exports = {
-    getAllPG: (callBack) => {
+    getAllR: (callBack) => {
         connectionPool.query(
-            'SELECT * FROM PGAnswers; SELECT * FROM PGQuestions',
+            'SELECT * FROM RAnswers; SELECT * FROM RQuestions',
             (error, results, fields) => {
                 if (error) {
                     callBack(error);
@@ -14,9 +14,9 @@ module.exports = {
             }
         )
     },
-    getPGByID: (id, callBack) => {
+    getRByID: (id, callBack) => {
         connectionPool.query(
-          `SELECT * FROM PGAnswers where id=?; SELECT * FROM PGQuestions where id=?`,
+          `SELECT * FROM RAnswers where id=?; SELECT * FROM RQuestions where id=?`,
           [id, id],
           (error, results, fields) => {
             if (error) {
