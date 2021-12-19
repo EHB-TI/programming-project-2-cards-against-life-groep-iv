@@ -1,30 +1,33 @@
 <?php
 
-    $con =  mysqli_connect('localhost', 'ryan', '1235', 'programming_project');
-    if(mysqli_connect_errno()){
-        http_response_code(500);
-        die();
-    }
+        //Author: De Vogel Ryan
 
-    $username = $_POST["username"];
-    $password = $_POST["password"];
+        //Source: https://github.com/herbou/Tuto_Unity_SendDataToServer
+        include_once("db.php");
 
-////////////////
-    $result = $con->prepare("SELECT username,salt,hash,score FROM users WHERE username = ?");
-    $result->bind_param("s", $username);
-    $result->execute();
-    $found = $result->fetch();                        
-    $result->close();
-
-
-    if ($found){      
-        if(password_verify($password, $found['password'])){
-            echo("logged in!");
-        }else {
+        if (isset($_POST["username"]) && !empty($_POST["username"]) && //check if variabeles are not empty
+	    isset($_POST["password"]) && !empty($_POST["password"])){
+            
+            Login($_POST["username"], $_POST["password"]);
+	    }
+        else {
+            exit();
             http_response_code(500);
-        }             
-    } else {
-        http_response_code(500);
-    }
+        }
 
+        function Login($username, $password){
+            GLOBAL $con;
+            $namecheckquery = "SELECT username FROM Users WHERE username=? AND password=?";//match the given data with the database
+            $selectQuery=$con->prepare($namecheckquery);
+            $selectQuery->execute(array($username, sha1($password)));//Sha1 is a hashing algoritm
+            $all=$selectQuery->fetchAll();//get the results of query
+            if (count($all) == 1){//We check if the the resulst is succes which means the user exists
+                exit();//quit the program login is succesfull
+                http_response_code(200);
+            }
+            else {
+                http_response_code(500);
+            }
+
+        }
 ?>
