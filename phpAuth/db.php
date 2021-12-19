@@ -1,4 +1,5 @@
-<?php   
+<?php
+	//get credentials
     $host   = "...";
 	$user   = "...";
 	$pass   = "...";
