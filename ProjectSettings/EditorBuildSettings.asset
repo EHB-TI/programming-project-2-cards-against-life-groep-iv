@@ -9,9 +9,21 @@ EditorBuildSettings:
     path: Assets/Scenes/MenuScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 0
-    path: Assets/Scenes/RoomScene.unity
-    guid: 353053939eb65084b94182bb8b71dabb
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: Assets/Scenes/Rooms/RoomOpen.unity
+    guid: e5f688e9ca6e23f4ca994e6db3bfae6b
   - enabled: 1
     path: Assets/Scenes/GameScene.unity
     guid: f7694c0cabe6e204bb4eef59f711f65a
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: Assets/Scenes/Rooms/RoomOpen.unity
+    guid: e5f688e9ca6e23f4ca994e6db3bfae6b
+  - enabled: 0
+    path: Assets/Scenes/Rooms/RoomClosed.unity
+    guid: 368a614be45d5a140ae7d7920dc1d7ed
   m_configObjects: {}

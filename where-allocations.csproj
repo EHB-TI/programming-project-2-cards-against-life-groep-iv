@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{AD019B7B-9451-6EB3-4C65-8EF793FF40B3}</ProjectGuid>
+    <ProjectGuid>{5877125E-9097-F741-0A93-E89E89B0A9C5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>where-allocations</AssemblyName>

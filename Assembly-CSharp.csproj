@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{4E5F2716-2CF6-C5A1-AA90-C84ED1CE2295}</ProjectGuid>
+    <ProjectGuid>{5688D1ED-4F19-C09E-8AD1-9C1E8C205047}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -53,6 +53,7 @@
     <UnityVersion>2020.3.24f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Controllers\tabGroup.cs" />
     <Compile Include="Assets\Scripts\GameScripts\ButtonControllerGame.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
@@ -63,12 +64,14 @@
     <Compile Include="Assets\Scripts\GameScripts\AnotherController.cs" />
     <Compile Include="Assets\clicky.cs" />
     <Compile Include="Assets\NetworkManagerGame.cs" />
+    <Compile Include="Assets\Scripts\Controllers\API\RoomAPIController.cs" />
     <Compile Include="Assets\Scripts\GameScripts\Card2.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
     <Compile Include="Assets\Scenes\WebTest.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
     <Compile Include="Assets\Scripts\Controllers\Tabs\TabGroup.cs" />
     <Compile Include="Assets\Scripts\GameScripts\network\Scripts\DrawCards.cs" />
+    <Compile Include="Assets\Scripts\Abstracts\RoomData.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
     <Compile Include="Assets\Scripts\GameScripts\AnotherScript.cs" />
@@ -99,10 +102,14 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
     <Compile Include="Assets\Scripts\Managers\SceneManagerScript.cs" />
     <Compile Include="Assets\Scripts\Managers\CardManager.cs" />
+    <Compile Include="Assets\setUpPlayer.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\Abstracts\Card.cs" />
     <Compile Include="Assets\Scripts\Controllers\Tabs\TabButton.cs" />
+    <Compile Include="Assets\Scripts\GameScripts\PlayerStats.cs" />
+    <Compile Include="Assets\Scripts\Controllers\tabButton.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
+    <Compile Include="Assets\Scripts\GameScripts\PlayerReady.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
@@ -115,6 +122,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
+    <Compile Include="Assets\Scripts\GameScripts\PlayerSetUp.cs" />
     <Compile Include="Assets\Scripts\Abstracts\Player.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -833,43 +841,43 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Mirror.csproj">
-      <Project>{AFACD241-3201-3C9C-39BE-0C59E8D5799C}</Project>
+      <Project>{2CDC1961-D08A-0E8F-76FA-F787A1AD4A2A}</Project>
       <Name>Mirror</Name>
     </ProjectReference>
     <ProjectReference Include="kcp2k.csproj">
-      <Project>{11001757-D228-B33F-9C02-353BF6A24C2C}</Project>
+      <Project>{1449BD94-4401-EEFB-6653-9E51A20EF0CD}</Project>
       <Name>kcp2k</Name>
     </ProjectReference>
     <ProjectReference Include="Mirror.Examples.csproj">
-      <Project>{152D98AA-2421-92AE-8D81-1C00A8AC3908}</Project>
+      <Project>{520ABF0C-3FC0-D377-E033-E360D6BA22BB}</Project>
       <Name>Mirror.Examples</Name>
     </ProjectReference>
     <ProjectReference Include="Mirror.Editor.csproj">
-      <Project>{B085AE11-C8BC-7B72-8304-FC90206A80CC}</Project>
+      <Project>{F2B79AF1-B228-8F11-4017-B699E9108E64}</Project>
       <Name>Mirror.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Mirror.CompilerSymbols.csproj">
-      <Project>{5D1F6189-47D1-DEE1-E46E-177C04DB13F4}</Project>
+      <Project>{4CB37EED-2074-B58F-536A-9E46FFDBF120}</Project>
       <Name>Mirror.CompilerSymbols</Name>
     </ProjectReference>
     <ProjectReference Include="Mirror.Authenticators.csproj">
-      <Project>{30365056-CD2B-6AF3-E57A-2CD76651BDF6}</Project>
+      <Project>{A8517292-D10C-7063-20D3-4760CF84CC74}</Project>
       <Name>Mirror.Authenticators</Name>
     </ProjectReference>
     <ProjectReference Include="Telepathy.csproj">
-      <Project>{7DB33401-4EE9-8794-D9AF-E89B36661FEC}</Project>
+      <Project>{C9B044F9-1146-AEC4-EB74-8E8B04BA1C3E}</Project>
       <Name>Telepathy</Name>
     </ProjectReference>
     <ProjectReference Include="where-allocations.csproj">
-      <Project>{AD019B7B-9451-6EB3-4C65-8EF793FF40B3}</Project>
+      <Project>{5877125E-9097-F741-0A93-E89E89B0A9C5}</Project>
       <Name>where-allocations</Name>
     </ProjectReference>
     <ProjectReference Include="SimpleWebTransport.csproj">
-      <Project>{A1A2728B-ABD8-496D-B78B-91EF7916AB83}</Project>
+      <Project>{356289C4-1646-44AE-6BF2-DD3657ACEC27}</Project>
       <Name>SimpleWebTransport</Name>
     </ProjectReference>
     <ProjectReference Include="Mirror.Components.csproj">
-      <Project>{54FBE004-205E-51AE-1D28-9F1C7810D79B}</Project>
+      <Project>{93C57D25-0FDD-1CCA-60EB-4504E6B1C66C}</Project>
       <Name>Mirror.Components</Name>
     </ProjectReference>
   </ItemGroup>

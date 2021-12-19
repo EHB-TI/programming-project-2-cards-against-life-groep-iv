@@ -13,12 +13,13 @@ public class CardFlipper : MonoBehaviour
 
     public void Flip(string caller)
     {
+        
         //when Flip() is called, store the value of the current sprite attached to this gameobject
         Sprite currentSprite = gameObject.GetComponent<Image>().sprite;
         Text currentText = gameObject.GetComponent<Text>();
-
+        /*
         //conditional logic to determine whether to display the card front or back sprite
-        /*if (currentSprite == CardFront)
+        if (currentSprite == CardFront)
         {
             gameObject.GetComponent<Image>().sprite = CardBack;
         }
@@ -26,7 +27,7 @@ public class CardFlipper : MonoBehaviour
         {
             gameObject.GetComponent<Image>().sprite = CardFront;
         }
-        */
+        
         Debug.Log("FLIPPING");
 
         if (caller == "host")
@@ -44,6 +45,6 @@ public class CardFlipper : MonoBehaviour
             // gameObject.GetComponent<Text>().text = "waiting for player";
         }
 
-
+        */
     }
 }
