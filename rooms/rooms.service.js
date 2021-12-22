@@ -37,12 +37,12 @@ module.exports = {
                 }
                 if (!rows.length) {
                     connectionPool.query(
-                        'INSERT INTO Rooms(id_user,code,cat,public,open) VALUES (?,?,?,?,?)',
+                        'INSERT INTO Rooms(id_user,code,cat,pub,open) VALUES (?,?,?,?,?)',
                         [
                             data.id_user,
                             data.code,
                             data.cat,
-                            data.public,
+                            data.pub,
                             data.open
                         ],
                         (error, results, fields) => {
