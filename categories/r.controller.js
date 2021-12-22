@@ -9,7 +9,10 @@ module.exports = {
         getAllR((err, results) => {
             if (err) {
                 console.log(err);
-                return;
+                return res.status(500).json({
+                    success: 0,
+                    message: "error"
+                });
             }
             if (!results) {
                 return res.json({
@@ -31,10 +34,13 @@ module.exports = {
         getRByID(id, (err, results) => {
             if (err) {
                 console.log(err);
-                return;
+                return res.status(500).json({
+                    success: 0,
+                    message: "error"
+                });
             }
             if (!results[0].length > 0 || !results[1].length > 0) {
-                return res.json({
+                return res.status(500).json({
                     success: 0,
                     message: "No cards found with id: " + id
                 });

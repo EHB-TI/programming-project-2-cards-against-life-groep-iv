@@ -1,12 +1,12 @@
 //Author: De Vogel Ryan
 const {
-    getAllStats,
-    getStatByUserID
-} = require("./stat.service");
+    getAllfriends,
+    getFriendByUserID
+} = require("./friend.service");
 
 module.exports = {
-    getAllStats: (req, res) => {
-        getAllStats((err, results) => {
+    getAllfriends: (req, res) => {
+        getAllfriends((err, results) => {
             if (err) {
                 console.log(err);
                 return res.status(500).json({
@@ -14,7 +14,7 @@ module.exports = {
                     message: "error"
                 });
             }
-            if (!results) {//
+            if (!results) {
                 return res.json({
                     success: 0,
                     message: "Record not Found"
@@ -22,29 +22,26 @@ module.exports = {
             }
             return res.json({
                 success: 1,
-                Stats: results
+                Friends: results
             });
         });
     },
-    getStatByUserID: (req, res) => {
+    getFriendByUserID: (req, res) => {
         const id = req.params.id;
-        getStatByUserID(id, (err, results) => {
+        getFriendByUserID(id, (err, results) => {
             if (err) {
                 console.log(err);
-                return res.status(500).json({
-                    success: 0,
-                    message: "error"
-                });
+                return;
             }
             if (!results.length > 0) {
                 return res.json({
                     success: 0,
-                    message: "No stats found with userID: " + id
+                    message: "No users found with id: " + id
                 });
             }
             return res.json({
                 success: 1,
-                Stat: results
+                Friend: results[0]
             });
         });
     },

@@ -2,9 +2,9 @@
 const connectionPool = require("../config/database");
 
 module.exports = {
-    getAllRooms: (callBack) => {
+    getAllfriends: (callBack) => {
         connectionPool.query(
-            'SELECT * FROM Rooms;',
+            'SELECT * FROM Friends;',
             (error, results, fields) => {
                 if (error) {
                     callBack(error);
@@ -14,9 +14,9 @@ module.exports = {
             }
         )
     },
-    getRoomByID: (id, callBack) => {
+    getFriendByUserID: (id, callBack) => {
         connectionPool.query(
-            `SELECT * FROM Rooms where id=?`,
+            `SELECT * FROM Friends where id_user=?`,
             [id],
             (error, results, fields) => {
                 if (error) {
@@ -26,7 +26,7 @@ module.exports = {
             }
         );
     },
-    //This is for checking for a duplicate value
+     //This is for checking for a duplicate value
     //source: https://www.titanwolf.org/Network/q/73afed53-5543-4927-bd51-8d4bb977ecf0/y
     createRoom: (data, callBack) => {
         connectionPool.query('SELECT * FROM Rooms WHERE code = ?',
@@ -37,19 +37,16 @@ module.exports = {
                 }
                 if (!rows.length) {
                     connectionPool.query(
-                        'INSERT INTO Rooms(id_user,code,cat,public,open) VALUES (?,?,?,?,?)',
+                        'INSERT INTO Rooms(id_user,code,open) VALUES (?,?,?)',
                         [
                             data.id_user,
                             data.code,
-                            data.cat,
-                            data.public,
                             data.open
                         ],
                         (error, results, fields) => {
                             if (error) {
                                 callBack(error);
                             }
-
                             return callBack(null, results);
                         }
                     )

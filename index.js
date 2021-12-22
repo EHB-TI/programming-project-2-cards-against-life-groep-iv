@@ -3,14 +3,18 @@
 
 require('dotenv').config();
 const express = require('express');
-const cors = require('cors');
 const app = express();
-app.use(cors())
+const helmet = require("helmet");
+const rateLimit = require("express-rate-limit");
+const cors = require('cors');
+app.use(cors());
 const getPG = require('./categories/pg.router');
 const getPG13 = require('./categories/pg13.router');
 const getR = require('./categories/r.router');
+const getCommunity = require('./categories/community.router');
 const getRoom = require('./rooms/rooms.router');
 const getUser = require('./users/user.router');
+const getFriends = require('./friends/friend.router');
 const getStats = require('./stats/stat.router');
 
 //This is to fix the CORS errors
@@ -24,6 +28,17 @@ app.use(function (req, res, next) {
     next();
 });
 
+//helmet: https://helmetjs.github.io/
+app.use(helmet());
+
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100 // limit each IP to 100 requests per windowMs
+});
+  
+// apply to all requests
+app.use(limiter);
+
 //This is needed so client can post json data
 app.use(express.json());
 
@@ -31,12 +46,16 @@ app.use(express.json());
 app.use("/pg", getPG);
 app.use("/pg13", getPG13);
 app.use("/r", getR);
+app.use("/community", getCommunity);
 
 //Rooms
 app.use("/rooms", getRoom);
 
 //Users
 app.use("/users", getUser);
+
+//Users
+app.use("/friends", getFriends);
 
 //Stats
 app.use("/stats", getStats);

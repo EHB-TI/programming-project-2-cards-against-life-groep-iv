@@ -8,7 +8,10 @@ module.exports = {
     getAllPG((err, results) => {
       if (err) {
         console.log(err);
-        return;
+        return res.status(500).json({
+          success: 0,
+          message: "error"
+      });
       }
       if (!results) {
         return res.json({
@@ -29,7 +32,10 @@ module.exports = {
     getPGByID(id, (err, results) => {
       if (err) {
         console.log(err);
-        return;
+        return res.status(500).json({
+          success: 0,
+          message: "error"
+      });
       }
       if (!results[0].length > 0 || !results[1].length >0) { //check if the response if not empty(or in other words the room with that id exists).
         //we SELECT 2 tables so that's why results[0] and results[1] is used. They each hold the response of a different table.
