@@ -13,9 +13,11 @@ const getPG13 = require('./categories/pg13.router');
 const getR = require('./categories/r.router');
 const getCommunity = require('./categories/community.router');
 const getRoom = require('./rooms/rooms.router');
+const getRoomUsers = require('./rooms/users.router')
 const getUser = require('./users/user.router');
 const getFriends = require('./friends/friend.router');
 const getStats = require('./stats/stat.router');
+const req = require('express/lib/request');
 
 //This is to fix the CORS errors
 //This way a local client can do a get request.
@@ -50,6 +52,9 @@ app.use("/community", getCommunity);
 
 //Rooms
 app.use("/rooms", getRoom);
+
+//RoomUses
+app.use('/roomUsers', getRoomUsers);
 
 //Users
 app.use("/users", getUser);
