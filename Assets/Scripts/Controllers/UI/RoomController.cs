@@ -16,16 +16,21 @@ public class RoomController : MonoBehaviour, IPointerClickHandler
     public void showRooms(List<Room> rooms)
     {
         int posX = 0;
+        
         foreach (Room r in rooms)
         {
-            GameObject GoBtn = Instantiate(BtnPreFab, panel.transform);
-            GoBtn.SetActive(true);
-            GoBtn.transform.SetParent(panel.transform, true);
-            Vector3 pos = GoBtn.transform.position;
+            if (r.pub == 1) //When room is public
+            {
+                //Make room buttons
+                GameObject GoBtn = Instantiate(BtnPreFab, panel.transform);
+                GoBtn.SetActive(true);
+                GoBtn.transform.SetParent(panel.transform, true);
+                Vector3 pos = GoBtn.transform.position;
 
-            GoBtn.transform.position = new Vector3(pos.x+ posX, pos.y);
-            GoBtn.GetComponentInChildren<TextMeshProUGUI>().SetText("Room " + r.room_id);
-            posX += 80;
+                GoBtn.transform.position = new Vector3(pos.x + posX, pos.y);
+                GoBtn.GetComponentInChildren<TextMeshProUGUI>().SetText("Room " + r.room_id);
+                posX += 100;
+            }
         }
     }
 

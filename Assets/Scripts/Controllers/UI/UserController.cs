@@ -4,30 +4,24 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class communityController : MonoBehaviour
+public class UserController : MonoBehaviour
 {
-
     public GameObject BtnPreFab;
     public Transform panel;
 
-    public void showQuestions(List<Community> questions)
+    public void showUsers(List<User> users)
     {
-        Debug.Log(questions[0].questions);
+        Debug.Log(users[0].username);
 
-
+       
         GameObject clickBtn = Instantiate(BtnPreFab, panel.transform);
         clickBtn.SetActive(true);
         clickBtn.transform.SetParent(panel.transform, false);
 
-
         clickBtn.GetComponentInChildren<Text>().text = "bla";
 
+     
+
+       
     }
-
-   
-   
-
-
 }
-
-
