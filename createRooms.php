@@ -7,7 +7,7 @@
         createRoom($_POST["id_user"], $_POST["code"], $_POST["public"], $_POST["open"]);
     }
 
-    function createRoom($id_user, $code, $public ,$open){
+    function createRoom($id_user, $code, $public, $open){
         $url = 'localhost:3000/rooms';
         // Setup request to send json via POST
         $data = array(
