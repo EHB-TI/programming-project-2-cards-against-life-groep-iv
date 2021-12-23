@@ -12,6 +12,10 @@ public class StatsData
 [System.Serializable]
 public class Stats
 {
+    public Stats(int id_user)
+    {
+        this.id_user = id_user;
+    }
     public int id { get; set; }
     public int id_user { get; set; }
     public int games_played { get; set; }

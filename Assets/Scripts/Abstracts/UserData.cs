@@ -5,9 +5,9 @@ using UnityEngine;
 [System.Serializable]
 public class UserData
 {
-    public int success { get; set; }
+    
     public User User { get; set; }
-    public List<User> users{ get; set; }
+    public List<User> Users{ get; set; }
 }
 
 [System.Serializable]
