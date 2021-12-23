@@ -4,20 +4,25 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 using Newtonsoft.Json;
+using SimpleJSON;
 
 [System.Serializable]
 public class RoomAPIController : MonoBehaviour
 {
+   public RoomController roomController;
+   public List<Room> rooms;
+
     IEnumerator Start()
     {
+        RoomData Data;
         UnityWebRequest request = UnityWebRequest.Get("http://localhost:3000/rooms");
         yield return request.SendWebRequest();
         if (request.error == null)
         {
             Debug.Log(request.downloadHandler.text);
-            RoomData rooms = JsonConvert.DeserializeObject<RoomData>(request.downloadHandler.text);
-
-            getRooms(rooms);
+            Data = JsonConvert.DeserializeObject<RoomData>(request.downloadHandler.text);
+            rooms = Data.Rooms;
+            roomController.showRooms(rooms);
         }
         else
         {
@@ -25,13 +30,37 @@ public class RoomAPIController : MonoBehaviour
         }
     }
 
-    public void getRooms(RoomData rooms)
+    public void MakeRoom(int open, int cat)
     {
-        Debug.Log(rooms.data[0]);
+        StartCoroutine(InsertRoom(open, cat));
+    }
 
-        foreach (Data x in rooms.data)
+    public int generateRandom()
+    {
+        return Random.Range(0, 2000);
+    }
+
+    IEnumerator InsertRoom(int open, int cat)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("id_user", 2);
+        form.AddField("code", generateRandom());
+        form.AddField("cat", cat);
+        form.AddField("pub", open);
+        form.AddField("open",1);
+
+        UnityWebRequest www = UnityWebRequest.Post("http://localhost/TestApi/createRooms.php", form);
+        yield return www.SendWebRequest();
+        if (www.responseCode == 200)
         {
-            Debug.Log(x.code);
+            Debug.Log("Room created succesfully!");
+        }
+        else
+        {
+            Debug.Log("Room creation failed!. Error: " + www.error);
+            InsertRoom(open, cat);
         }
     }
 }
+
+
