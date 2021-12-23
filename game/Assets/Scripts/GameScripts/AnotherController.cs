@@ -52,6 +52,9 @@ public class AnotherController : MonoBehaviour
         }
     }
     */
+
+
+
     public void selectCard(int number)
     {
         Debug.Log("Selected " + number);

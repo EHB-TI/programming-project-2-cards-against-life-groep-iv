@@ -27,6 +27,7 @@ public class CardsManager : NetworkBehaviour
         ShowingResults,
 
     }
+    public string apiSentence;
 
     public int playersNeeded = 0;
 
@@ -50,13 +51,133 @@ public class CardsManager : NetworkBehaviour
 
     public bool isReady = false;
     public CardsManager cardsManager;
+    public int nThisPlayer = -1;
 
-  
+    public int thisStatus;
+
+    //cards
+    public string [] cards = new string [4];
+
+    //State 2
+    public int selection;
+    public int justATest;
+
+    //state 3
+    public Text funniest;
+
+
+    
+
+    [Command]
+    public void changeTextToCero(CardsManager player)
+    {
+        changeTextToCeroRpc(player);
+    }
+
+    [ClientRpc]
+    public void changeTextToCeroRpc(CardsManager player)
+    {
+
+       // player.GetComponent<PlayerReady>().players[player.nThisPlayer].statusText.GetComponent<Text>().text = "Waiting for host to pick";
+        //playerReady.GetComponent<PlayerReady>().hostFunniest = playerReady.GetComponent<PlayerReady>().cardChosen[number];
+
+    }
+
+    [Command]
+    public void funniestCard(int number)
+    {
+        funniestRpc(number);
+    }
+
+
+    //SHOWING THE FUNNIEST CARD
+    [ClientRpc]
+    public void funniestRpc(int number)
+    {
+      
+        playerReady.GetComponent<PlayerReady>().hostFunniest = playerReady.GetComponent<PlayerReady>().cardChosen[number];
+        funniest.text = playerReady.GetComponent<PlayerReady>().cardChosen[number];
+
+    }
+
+
+    [Command]
+    public void showFunniest()
+    {
+        showFunniestRpc();
+    }
+
+
+    //SHOWING THE FUNNIEST CARD
+    [ClientRpc]
+    public void showFunniestRpc( )
+    {
+        statusText.GetComponent<Text>().text = "And the funniest card is...";
+
+    }
+
+
+    [Command]
+    public void selectCard(string number, int numero)
+    {
+        selectCardRpc(number, numero);
+    }
+
+    //STORING THE CARD SELECTED FROM THE CLIENT
+    [ClientRpc]
+    public void selectCardRpc(string number, int numero)
+    {
+        Debug.Log("Selected " + number);
+        selection = numero;
+
+        //playerReady.GetComponent<PlayerReady>().players[number]
+        // playerReady.GetComponent<PlayerReady>().cardChosen[nThisPlayer] = playerReady.GetComponent<PlayerReady>().players[nThisPlayer].prefabs[number].transform.GetChild(1).GetComponent<Text>().text;
+        playerReady.GetComponent<PlayerReady>().cardChosen[nThisPlayer] = number;
+       // Debug.Log(playerReady.GetComponent<PlayerReady>().players[nThisPlayer].prefabs[number].transform.GetChild(1).GetComponent<Text>().text);
+        playerReady.GetComponent<PlayerReady>().hostSelection = numero;
+       
+    }
+
+
+    [Command]
+    public void changingText()
+    {
+        changingTextRpc();
+    }
+
+
+    //CHANGE THE STATUS TEXT IN STATUS 2
+    [ClientRpc]
+    public void changingTextRpc()
+    {
+        foreach(CardsManager players in playerReady.GetComponent<PlayerReady>().players)
+        {
+            players.statusText.GetComponent<Text>().text = "Host picking the funniest card";
+        }
+        
+
+    }
+
+    /*
+    public void finalSelection()
+    {
+        Debug.Log("U HAVE SELECTED: " + selection);
+        Card card = new Card();
+        card.cardName = "TEST";
+        //prefabs[selection].GetComponentinchild<Description>().initialize(card);
+        prefabs[selection].GetComponentInChildren<Text>().text = card.cardName;
+        prefabs[selection].transform.Find("CardName").GetComponent<Text>().text = "TITLE";
+        // this.transform.Find("Strong Aquaragia break").GetComponent<ParticleSystem>(
+        Debug.Log(card.cardName);
+    }
+
+    */
+    //ADD THE PLAYER TO THE LIST OF PLAYERS
 
     public void AddPlayer(PlayerStats player)
     {
         _players.Add(player);
-    }
+            }
 
     public override void OnStartClient()
     {
@@ -67,11 +188,12 @@ public class CardsManager : NetworkBehaviour
         playerReady = GameObject.Find("Submit");
         Debug.Log(playerReady.name);
         playerReady.GetComponent<PlayerReady>().addPlayer(cardsManager);
+        nThisPlayer = playerReady.GetComponent<PlayerReady>().nPlayers - 1;
         //playersR = playerReady.GetComponent<Text>();
         //numberOfPlayers = GameObject.Find("NumberOfPlayers");
-       // numberPlayers = numberOfPlayers.GetComponent<Text>();
+        // numberPlayers = numberOfPlayers.GetComponent<Text>();
 
-       // playersR.text = "Ready: " + playersReady + " /2";
+        // playersR.text = "Ready: " + playersReady + " /2";
         playerNumberInc++;
         playerNumber = playerNumberInc;
         ready.Add(false);
@@ -89,6 +211,12 @@ public class CardsManager : NetworkBehaviour
         prefabs.Add(GameObject.Find("Pos3").transform.GetChild(0).gameObject);
         prefabs.Add(GameObject.Find("Pos4").transform.GetChild(0).gameObject);
 
+
+        funniest = GameObject.Find("Funniest").GetComponent<Text>();
+        //funniest.GetComponent<Animation>().Play();
+       // Debug.Log("isplaying");
+       
+       // funniest.GetComponent<Animator>().enabled = true;
         if (!isServer)
         {
             foreach(GameObject prefab in prefabs)
@@ -100,7 +228,7 @@ public class CardsManager : NetworkBehaviour
         for (int i = 0; i < PlayerArea.Count; i++)
         {
             Debug.Log(i);
-            prefabs.Add(PlayerArea[i].transform.GetChild(0).gameObject);
+            //prefabs.Add(PlayerArea[i].transform.GetChild(0).gameObject);
         }
         
     //    numberPlayers.text = "PLAYERS: " + players;
@@ -177,48 +305,73 @@ public class CardsManager : NetworkBehaviour
     [ClientRpc]
     void RpcshowText(GameObject manager)
     {
-        manager.GetComponent<PlayerReady>().actualPlayersText = "HAUAHA IM SO FUNMY__";
+       // manager.GetComponent<PlayerReady>().actualPlayersText = "HAUAHA IM SO FUNMY__";
         //GET PHRASE VALUE FROM API
-        string apiSentence = "NEW CARD-SENTENCE";
-        mainText.GetComponent<Text>().text = apiSentence;
+      //   apiSentence = "NEW CARD-SENTENCE";
+        apiSentence = manager.GetComponent<PlayerReady>().api.randomQuestion();
+        //mainText.GetComponent<Text>().text = apiSentence;
         manager.GetComponent<PlayerReady>().mainText = apiSentence;
-        Debug.Log(manager.GetComponent<PlayerReady>().actualPlayersText);
+      //  Debug.Log(manager.GetComponent<PlayerReady>().actualPlayersText);
     }
 
     [Command]
     public void CmdClientshowText(GameObject manager)
     {
-        RpcClientshowText(manager);
+         RpcClientshowText(manager);
     }
 
     //RpcIncrementClick() is called on all clients to increment the NumberOfClicks SyncVar within the IncrementClick script and log it to the debugger to demonstrate that it's working
     [ClientRpc]
     void RpcClientshowText(GameObject manager)
     {
-      //  manager.GetComponent<PlayerReady>().actualPlayersText = "HAUAHA IM SO FUNMY__";
-        //GET PHRASE VALUE FROM API
-        mainText.GetComponent<Text>().text = "This is a new card!";
-        Debug.Log(manager.GetComponent<PlayerReady>().actualPlayersText);
+      apiSentence = manager.GetComponent<PlayerReady>().api.randomCard();
     }
 
 
 
     [Command]
-    public void changedStatus(GameObject car)
+    public void changeStatus(GameObject car)
     {
-
+        RpcChangeStatus(car);
     }
 
     [ClientRpc]
     void RpcChangeStatus(GameObject card)
     {
-        card.GetComponent<PlayerReady>().status = 1;
+        card.GetComponent<PlayerReady>().status = 2;
+        thisStatus = 2;
+        /*
+        for(int i = 0; i<2; i++)
+        {
+            prefabs[i].GetComponentInChildren<Text>().text = playerReady.GetComponent<PlayerReady>().cardChosen[i].ToString();
+            
+        }
+        */
+      //  card.GetComponent<PlayerReady>().
+       // justATest = 2;
+     //   Debug.Log(justATest);
     }
 
     public void changeHostText()
     {
 
     }
+
+    [Command]
+    public void resetAll()
+    {
+        resetAllRpc();
+    }
+
+    [ClientRpc]
+    public void resetAllRpc()
+    {
+        mainText.GetComponent<Text>().text = "";
+    }
+
+
+
+
     /*
 
     [Server]
