@@ -1,12 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Mirror;
 
-public class PlayerStats : NetworkBehaviour
+public class profile : MonoBehaviour
 {
-    public CardsManager cardController;
-    public bool isReady;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,14 +15,9 @@ public class PlayerStats : NetworkBehaviour
     {
         
     }
-
-    private void Awake()
+    public void getAllPlayers(User userData)
     {
-        cardController = FindObjectOfType<CardsManager>();
-    }
+      
 
-    public override void OnStartClient()
-    {
-        
     }
 }
