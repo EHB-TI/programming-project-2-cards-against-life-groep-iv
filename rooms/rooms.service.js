@@ -16,7 +16,7 @@ module.exports = {
     },
     getRoomByID: (id, callBack) => {
         connectionPool.query(
-            `SELECT * FROM Rooms where id=?`,
+            `SELECT * FROM Rooms where room_id=?`,
             [id],
             (error, results, fields) => {
                 if (error) {
