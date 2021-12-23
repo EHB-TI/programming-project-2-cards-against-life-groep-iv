@@ -8,7 +8,8 @@ using UnityEngine.EventSystems;
 public class TabButton : MonoBehaviour, IPointerClickHandler
 {
     public TabGroup tabGroup;
-   
+    public int id;
+
     public Image background {get; set;}
 
     public void OnPointerClick(PointerEventData eventData)
@@ -21,5 +22,4 @@ public class TabButton : MonoBehaviour, IPointerClickHandler
         background = GetComponent<Image>();
     }
 
-    
 }
