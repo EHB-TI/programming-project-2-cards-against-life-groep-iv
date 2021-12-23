@@ -22,7 +22,7 @@
             
             $selectQuery=$con->prepare($namecheckquery);
             $selectQuery->execute(array($username));
-            $all=$selectQuery->fetchAll();//get the results of query
+            $all=$selectQuery->fetchAll(PDO::FETCH_COLUMN, 0);//get the results of query
             if (count($all) == 1){ //We check if the the resulst is succes which means the user exists
                 http_response_code(500);
             }
@@ -30,6 +30,8 @@
                 $createUser = "INSERT INTO Users (username, password, level) VALUES (?,?,?);";//make new user with preparedStatements
                 $insertQuery= $con->prepare($createUser);
                 $insertQuery->execute(array($username, sha1($password), 0));//Sha1 is a hashing algoritm
+                $id=$insertQuery->fetchAll(PDO::FETCH_COLUMN, 0);
+                echo($all[0]);
             }
 
         }
