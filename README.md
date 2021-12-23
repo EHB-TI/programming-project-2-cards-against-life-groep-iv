@@ -5,10 +5,10 @@ This is a cards game made with Unity. We will use a php server for authenticatio
 We have split our logic and branches in 3. The main is for the game, nodeJSAPI is for our API and php is for our php server.
 
 
-##Testing
+## Testing
 We have created a test user with the username: cardwizard and password: 12345678.
 
-##Credits
+## Credits
 Ryan, Anton, Sara and Alvaro have worked on this project.
 
 Ryan was responsible for the php server and the API.
