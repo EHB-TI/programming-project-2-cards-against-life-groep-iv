@@ -10,7 +10,7 @@ This worked great for us. It synct everyone up with the same project but this al
 
 
 ## Testing the Game
-THe .exe is located under 
+THe .exe of our game is located under the 'game' branch 
  
 We have created a test user with the username: cardwizard and password: 12345678.
 
