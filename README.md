@@ -6,13 +6,19 @@ We have split our logic and branches in 3. The main is for the game, nodeJSAPI i
 
 ## Collaborate
 We had some initial merge problems that we could not work out so we changed over to the build Unity versioning control feature 'collaborate'.
-This worked great for us. It synct everyone up with the same project but this also means that the code each indivdual has pushed to git not completely translate in what each person has made. The code each one wrote will be more clear in our demo vide.
+This worked great for us. It synced everyone up with the same project but this also means that the code each indivdual has pushed to git (located under Assest/scripts) do not completely translate in what each person has made. The code each one wrote will be more clear in our demo vide.
 
 
 ## Testing the Game
-THe .exe of our game is located under the 'game' branch 
- 
+To play our game you first have to setup the api's.
+
+Php: Have a local appache server running of the 'php branch' folder. preferably using xampp.
+Node.js: Have the node.js start running "npm start" located in the 'node.js branch'.
+
+Now you will be able to test our game using the .exe which is located under the 'game' branch -> thesProject.exe
+
 We have created a test user with the username: cardwizard and password: 12345678.
+
 
 ## Credits
 Ryan, Anton, Sara and Alvaro have worked on this project.
