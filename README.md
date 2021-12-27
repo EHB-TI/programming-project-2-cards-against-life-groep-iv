@@ -15,7 +15,7 @@ To play our game you first have to setup the api's.
 Php: Have a local appache server running of the 'php branch' folder. preferably using xampp.
 Node.js: Have the node.js start running "npm start" located in the 'node.js branch'.
 
-Now you will be able to test our game using the .exe which is located under the 'game' branch -> thesProject.exe
+Now you will be able to test our game using the .exe which is located under the 'game' branch -> thestProject.exe
 
 We have created a test user with the username: cardwizard and password: 12345678.
 
