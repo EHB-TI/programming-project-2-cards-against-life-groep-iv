@@ -19,7 +19,7 @@ Now you will be able to test our game using the .exe which is located under the 
 
 We have created a test user with the username: cardwizard and password: 12345678.
 
-To test the "proper game itself" go to: builds/TestProject.exe  and execute it four times. One should be the host and the other 3 should join the host by clicking "client". 
+To test the card portion of the our game, go to: builds/TestProject.exe and execute it four times. One should be the host and the other 3 should join the host by clicking "client". 
 
 
 ## Credits
